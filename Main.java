@@ -19,11 +19,10 @@ public class Main {
     private static Map<String, List<List<String>>> productions = new HashMap<String, List<List<String>>>();
     // private static Map<String, List<List<String>>> poem = new HashMap<String, List<List<String>>>();
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         try{
             PoemBuilder poem = new PoemBuilder(); 
-            poem.fileParser(productions, random);
-            
+            poem.buildAPoem(productions, random);
         }
         catch(Exception e){
             throw e;
