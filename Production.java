@@ -17,11 +17,11 @@ public class Production {
     }
 
     public String getNonTerminal() {
-        return nonTerminal;
+        return this.nonTerminal;
     }
 
     public List<String> getExpressions() {
-        return expressions;
+        return this.expressions;
     }
 
 }
