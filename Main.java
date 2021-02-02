@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Main {
 
     private static String expression = "";
-    private static java.util.List<Production> productionList = new ArrayList<Production>();
+    private static java.util.List productionList = new ArrayList();
     private static Random random = new Random();
     private static Map<String, List<List<String>>> productions = new HashMap<String, List<List<String>>>();
     private static Map<String, List<List<String>>> poem = new HashMap<String, List<List<String>>>();
@@ -24,6 +24,7 @@ public class Main {
             FileParser fp = new FileParser(); 
             fp.fileParser(productions);
             System.out.println(productions);
+            
         }
         catch(Exception e){
             throw e;
@@ -33,6 +34,7 @@ public class Main {
     static void printString(String s){
         System.out.println(s);
     }
+    
     
 }
 

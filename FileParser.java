@@ -18,7 +18,7 @@ public class FileParser {
 
     }
 
-    void fileParser(Map<String, List<List<String>>> productions) throws FileNotFoundException {
+    static void fileParser(Map<String, List<List<String>>> productions) throws FileNotFoundException {
         try{
             File rulesFromFile = new File("rules.txt");
         
@@ -47,7 +47,7 @@ public class FileParser {
             process:
             {
                 for (List<String> production : productions.get("VERB")) {
-                    String element = selectRandomElement(production);
+                    String element = Helper.selectRandomElement(production);
 
                     if (element.startsWith("$")) {
                         if (element.compareTo("$END") == 0) {
@@ -58,7 +58,7 @@ public class FileParser {
                         }
                     } else if (element.startsWith("<")) {
                         String newElement = "";
-                        for (String nonTerminal : findTerminal(element)) {
+                        for (String nonTerminal : Helper.findTerminal(element)) {
                             newElement += nonTerminal;
                         }
                         element = newElement;
@@ -74,8 +74,10 @@ public class FileParser {
             System.out.println("File Not Found!");
             throw e;
         }
+        
 
     }
+    
 
 
 
