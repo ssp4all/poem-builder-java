@@ -43,7 +43,7 @@ public class Helper {
         return tokens;
     }
 
-    public static String selectRandomElement(List<String> expressions, Random random) {
+    public static List<String> selectRandomElement(List<List<String>> expressions, Random random) {
         return expressions.get(random.nextInt(expressions.size()));
     }
 
@@ -73,6 +73,7 @@ public class Helper {
                 }
                 productions.put(nonTerminal, expressions);
             }
+            fileScanner.close();
             return productions;
         }
         catch(Exception e){
