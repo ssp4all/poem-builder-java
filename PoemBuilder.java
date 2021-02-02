@@ -12,17 +12,16 @@ import java.util.Scanner;
 import java.util.Random;
 import java.lang.*;
 
-public class FileParser {
+public class PoemBuilder {
 
-    FileParser() {
+    PoemBuilder() {
 
     }
 
-    static void fileParser(Map<String, List<List<String>>> productions) throws FileNotFoundException {
+    static void fileParser(Map<String, List<List<String>>> productions, Random random) throws FileNotFoundException {
         try{
+
             File rulesFromFile = new File("rules.txt");
-        
-        
             Scanner fileScanner = new Scanner(rulesFromFile);
 
             while (fileScanner.hasNext()) {
@@ -47,7 +46,7 @@ public class FileParser {
             process:
             {
                 for (List<String> production : productions.get("VERB")) {
-                    String element = Helper.selectRandomElement(production);
+                    String element = Helper.selectRandomElement(production, random);
 
                     if (element.startsWith("$")) {
                         if (element.compareTo("$END") == 0) {
@@ -58,7 +57,7 @@ public class FileParser {
                         }
                     } else if (element.startsWith("<")) {
                         String newElement = "";
-                        for (String nonTerminal : Helper.findTerminal(element)) {
+                        for (String nonTerminal : Helper.findTerminal(element, productions, random)) {
                             newElement += nonTerminal;
                         }
                         element = newElement;

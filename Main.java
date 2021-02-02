@@ -13,26 +13,22 @@ import java.io.IOException;
 
 public class Main {
 
-    private static String expression = "";
-    private static java.util.List productionList = new ArrayList();
+    // private static String expression = "";
+    // private static java.util.List productionList = new ArrayList();
     private static Random random = new Random();
     private static Map<String, List<List<String>>> productions = new HashMap<String, List<List<String>>>();
-    private static Map<String, List<List<String>>> poem = new HashMap<String, List<List<String>>>();
+    // private static Map<String, List<List<String>>> poem = new HashMap<String, List<List<String>>>();
 
     public static void main(String[] args) throws FileNotFoundException {
         try{
-            FileParser fp = new FileParser(); 
-            fp.fileParser(productions);
-            System.out.println(productions);
+            PoemBuilder poem = new PoemBuilder(); 
+            poem.fileParser(productions, random);
             
         }
         catch(Exception e){
             throw e;
         }
     
-    }
-    static void printString(String s){
-        System.out.println(s);
     }
     
     
