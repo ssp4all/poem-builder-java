@@ -6,7 +6,7 @@ on terminal
 ```
 javac *.java
 java Main
-```
+``oem 
 
 ## On Repl 
 `Just press ctr + enter / cmd + enter`
