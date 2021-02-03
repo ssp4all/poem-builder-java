@@ -1,4 +1,10 @@
 
+/**
+ * All the helper functions used in this project
+ *
+ * @author Suraj
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.io.FileNotFoundException;
@@ -20,38 +26,14 @@ public class Helper {
 
     }
 
-    public static String getNonTerminal(String production) {
-        String nonTerminal = production.split(": ")[0]; //get rule name
-        return nonTerminal;
-    }
 
-    public static List<String> getExpressions(String production) {
-        List<String> expressions = new ArrayList<String>(); //get rule itself
-        for (String expression : production.split(": ", -1)[1].split("\\|")) {
-            expressions.add(expression);
-        }
-        return expressions;
-    }
-
-    public static List<String> findTerminal(String nonTerminal, Map<String, List<List<String>>> productions, Random random) {
-        List<String> tokens = new ArrayList<String>();
-        nonTerminal = nonTerminal.substring(nonTerminal.indexOf('<') + 1, nonTerminal.indexOf('>'));
-        for (List<String> component : productions.get(nonTerminal)) {
-            tokens.add(selectRandomElement(component, random));
-        }
-        // System.out.println("tokens" + tokens.toString());
-        return tokens;
-    }
-
-    public static List<String> selectRandomElement(List<List<String>> expressions, Random random) {
+    public static String getRandomElement(List<String> expressions, Random random) {
         return expressions.get(random.nextInt(expressions.size()));
     }
 
-    public static boolean isTerminal(String expression) {
-        return !(expression.startsWith("$") || expression.startsWith("<"));
-    }
-
-    public static Map<String, List<List<String>>> buildDictionary(Map<String, List<List<String>>> productions) throws FileNotFoundException{
+    //Build complete dictionary which is going to be used to build a peom
+    //Hashmap has been used to so...
+    public static Map<String, List<List<String>>> buildDictionary(Map<String, List<List<String>>> dictionary) throws FileNotFoundException{
         try{
 
             File rulesFromFile = new File("rules.txt");
@@ -59,22 +41,22 @@ public class Helper {
 
             // build a hashmap
             while (fileScanner.hasNext()) {
-                String production = fileScanner.nextLine();
-                List<List<String>> expressions = new ArrayList<List<String>>();
+                String line = fileScanner.nextLine();
+                List<List<String>> exp = new ArrayList<List<String>>();
                 List<String> components = new ArrayList<String>();
 
-                String nonTerminal = production.split(": ")[0];
+                String rule = line.split(": ")[0];
 
-                components.addAll(Arrays.asList(production.split(": ")[1].split(" ")));
+                components.addAll(Arrays.asList(line.split(": ")[1].split(" ")));
                 for (String component : components) {
-                    List<String> expression2 = new ArrayList<String>();
-                    expression2.addAll(Arrays.asList(component.split("\\|")));
-                    expressions.add(expression2);
+                    List<String> tmpExp = new ArrayList<String>();
+                    tmpExp.addAll(Arrays.asList(component.split("\\|")));
+                    exp.add(tmpExp);
                 }
-                productions.put(nonTerminal, expressions);
+                dictionary.put(rule, exp);
             }
             fileScanner.close();
-            return productions;
+            return dictionary; //return hashmap
         }
         catch(Exception e){
             throw e;
