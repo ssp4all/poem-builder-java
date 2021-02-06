@@ -9,7 +9,7 @@ java Main
 ```
 
 ## On Repl 
-Visit https://repl.it/@ssp4all/SiftMediaTechnicalTest?view=1
+Visit https://repl.it/@ssp4all/random-poet-generator-java?view=1
 
 `Then press ctr + enter / cmd + enter`
 
